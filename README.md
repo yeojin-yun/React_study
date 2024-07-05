@@ -2,8 +2,6 @@
 ## udemy_app_01
 > 배운내용 : 함수 컴포넌트, 동적 값 사용, 이미지 import, props, 파일 분리, useState 등
 
-<br>
-
 ### 컴포넌트
 - React에서 모든 건 컴포넌트임. 컴포넌트의 조합이 UI를 구성하고 있음 (플러터의 위젯과 비슷한 듯)
 - 그러나 JSX 문법은 브라우저에서 읽지 못하기 때문에 별도의 render 작업이 필요함 -> 그 작업을 `index.jsx`에서 해줌
@@ -20,7 +18,7 @@ export default function App() {
 }
 ```
 - export하는 모양새가 function() 형태이기 때문에 **함수 컴포넌트**라고 함 (함수 컴포넌트 이전에는 클래스 형태로 export되어 클래스 컴포넌트라고 했음)
-<br>
+
 ### 커스텀 컴포넌트
 - `App.jsx` 파일에서 아래  형태가 바로 custom components
 ```JavaScript
