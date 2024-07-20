@@ -1,6 +1,18 @@
-interface TabButtonProps {
-    children: React.ReactNode;
+interface TabButtonProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
+  isSelected: Boolean;
 }
-export default function TabButton({ children }: TabButtonProps) {
-    return (<li><button>children</button></li>);
+export default function TabButton({
+  children,
+  isSelected,
+  ...props
+}: TabButtonProps) {
+  console.log(`children : ${children}`);
+  return (
+    <li>
+      <button className={isSelected ? 'active' : undefined} {...props}>
+        {children}
+      </button>
+    </li>
+  );
 }
