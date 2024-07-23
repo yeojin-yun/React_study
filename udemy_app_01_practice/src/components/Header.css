@@ -1,0 +1,16 @@
+header img {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 5rem;
+    width: 10rem;
+    object-fit: cover;
+  }
+
+  header h1{
+    margin: 10px;
+  }
+
+
+  header a {
+    margin-bottom: 50px;
+  }
