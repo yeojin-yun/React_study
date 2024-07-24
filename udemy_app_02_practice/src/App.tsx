@@ -1,25 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import Player from './components/Player';
+import GameBoard from './components/GameBoard';
+import { useState } from 'react';
 
 function App() {
+  const [activePlayer, setActionPlayer] = useState('X');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ol className="player">
+        <Player symbol="X" initialPlayerName="PLAYER 1"></Player>
+        <Player symbol="O" initialPlayerName="PLAYER 2"></Player>
+      </ol>
+      <GameBoard></GameBoard>
+    </>
   );
 }
 

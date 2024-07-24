@@ -37,9 +37,6 @@ export default function GameBoard({ onSelectSquare, turns }: GameBoardProps) {
   //   onSelectSquare();
   // }
 
-  const testFunction = (row: number, col: number) => {
-    onSelectSquare(row, col);
-   };
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIndex) => (
