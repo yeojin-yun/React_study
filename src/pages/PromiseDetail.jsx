@@ -11,20 +11,78 @@ const gridStyle = css`
 `;
 function PromiseDetail() {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [keyword, setKeyword] = useState("");
 
   const fetchUsers = () => {
+    setKeyword("");
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
+        setFilteredUsers(data);
       });
   };
+
+  const searchKeyword = () => {
+    setFilteredUsers(
+      users.filter((user) =>
+        user.name.toLowerCase().includes(keyword.toLowerCase())
+      )
+    );
+  };
   return (
-    <>
-      <h1>User List</h1>
-      <button onClick={fetchUsers}>User Data 불러오기</button>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px;
+      `}
+    >
+      <h1
+        css={css`
+          text-align: center;
+        `}
+      >
+        User List
+      </h1>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+        `}
+      >
+        <input
+          css={css`
+            padding: 16px;
+            flex: 7;
+            margin-right: 4px;
+          `}
+          onChange={(text) => setKeyword(text.target.value)}
+          value={keyword}
+        ></input>
+        <button
+          css={css`
+            flex: 1;
+            margin-right: 4px;
+          `}
+          onClick={searchKeyword}
+        >
+          검색
+        </button>
+        <button
+          css={css`
+            flex: 2;
+          `}
+          onClick={fetchUsers}
+        >
+          User Data 불러오기
+        </button>
+      </div>
       <div css={gridStyle}>
-        {users.map((user) => (
+        {filteredUsers.map((user) => (
           <UserCard
             key={user.id}
             name={user.name}
@@ -35,7 +93,7 @@ function PromiseDetail() {
           ></UserCard>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
