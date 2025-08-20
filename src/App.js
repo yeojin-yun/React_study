@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./App.css";
+import CardGrid from "./components/CardGrid";
+import PromiseDetail from "./pages/PromiseDetail";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<CardGrid></CardGrid>} />
+        <Route path="/lesson/:id" element={<PromiseDetail />} />
+        <Route path="*" element={<div>페이지를 찾을 수 없습니다.</div>} />
+      </Routes>
+    </Router>
   );
 }
 
