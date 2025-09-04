@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useState } from "react";
+import Modal from "./Modal";
 
 const InputContainer = ({ title, isNotValid, errorMessage, children }) => {
   return (
@@ -54,6 +55,9 @@ function UserInputDetail() {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(false);
 
+  //모달용
+  const [modalOpen, setModalOpen] = useState(false);
+
   const handleEmail = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -87,6 +91,7 @@ function UserInputDetail() {
 
   const handleAgreeChecked = (e) => {
     const value = e.target.checked;
+    console.log(`agree check ${value}`);
     setPrivacyAgreed(value);
   };
 
@@ -159,7 +164,7 @@ function UserInputDetail() {
       <InputContainer title={"개인정보 처리방침"}>
         <input
           type="checkbox"
-          value={privacyAgreed}
+          checked={privacyAgreed}
           onChange={(e) => handleAgreeChecked(e)}
         ></input>
       </InputContainer>
@@ -170,10 +175,20 @@ function UserInputDetail() {
             border: none;
             outline: none;
           `}
+          onClick={() => setModalOpen(true)}
         >
           회원가입
         </button>
       </InputContainer>
+      {modalOpen && (
+        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+          <p>이메일: {email}</p>
+          <p>이름: {name}</p>
+          <p>생년월일: {birthDate}</p>
+          <p>개인정보 처리방침: {privacyAgreed}</p>
+          <p>위 정보를 등록하시겠습니까?</p>
+        </Modal>
+      )}
     </div>
   );
 }
