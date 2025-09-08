@@ -3,6 +3,7 @@ import "./App.css";
 import CardGrid from "./components/CardGrid";
 import EventHandlingDetail from "./pages/EventHandlingDetail";
 import PromiseDetail from "./pages/PromiseDetail";
+import StateDetail from "./pages/StateDetail";
 import UserInputDetail from "./pages/UserInputDetail";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/lesson/1" element={<PromiseDetail />} />
         <Route path="/lesson/2" element={<EventHandlingDetail />} />
         <Route path="/lesson/3" element={<UserInputDetail />} />
+        <Route path="/lesson/4" element={<StateDetail />} />
         <Route path="*" element={<div>페이지를 찾을 수 없습니다.</div>} />
       </Routes>
     </Router>

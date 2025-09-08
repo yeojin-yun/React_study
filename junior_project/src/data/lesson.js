@@ -12,6 +12,12 @@ const lessonsList = [
     backgroundColor: "#37329fff",
     fontColor: "#ffffff",
   },
+  {
+    id: 4,
+    title: "State",
+    backgroundColor: "#b5fa20ff",
+    fontColor: "#000000ff",
+  },
 ];
 
 export default lessonsList;
