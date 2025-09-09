@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { useState } from "react";
 
 const tableBorder = css`
@@ -94,7 +95,7 @@ function StateDetail() {
             type="number"
             placeholder="가격"
             onChange={handlePrice}
-            value={price}
+            value={price.toLocaleString()}
           ></input>
           <button onClick={addItem}>추가</button>
         </div>
@@ -129,9 +130,119 @@ function StateDetail() {
         )}
       </div>
 
+      <TodoCompopnent></TodoCompopnent>
+    </div>
+  );
+}
+
+const FilterButton = styled.button`
+  border-radius: 20px;
+  /* border: 1px solid blue; */
+  padding: 0px 8px;
+  margin-right: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: none;
+  background-color: ${(props) => (props.isActive ? "yellow" : "blue")};
+  color: ${(props) => (props.isActive ? "black" : "white")};
+`;
+
+function TodoCompopnent() {
+  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [filter, setFilter] = useState("all");
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
+
+  const addItem = () => {
+    if (todo.trim()) {
+      const newItem = {
+        id: Date.now(),
+        name: todo,
+        completed: false,
+      };
+      setTodos([...todos, newItem]);
+      setTodo("");
+    }
+  };
+
+  const handleFilter = (newFilter) => {
+    console.log(todos);
+    setFilter(newFilter);
+  };
+
+  const handleToggle = (id) => {
+    const list = todos.map((e) =>
+      e.id === id ? { ...e, completed: !e.completed } : e
+    );
+
+    setTodos([...list]);
+  };
+
+  return (
+    <div>
+      <h1>To Do List</h1>
       <div>
-        <h1>TO DO LIST</h1>
+        <input
+          type="text"
+          placeholder="할 일"
+          value={todo}
+          onChange={(e) => setTodo(e.target.value)}
+        ></input>
+        <button onClick={addItem}>추가</button>
       </div>
+      <div>
+        <FilterButton
+          isActive={filter === "all"}
+          onClick={() => handleFilter("all")}
+        >
+          all
+        </FilterButton>
+        <FilterButton
+          isActive={filter === "active"}
+          onClick={() => handleFilter("active")}
+        >
+          activce
+        </FilterButton>
+        <FilterButton
+          isActive={filter === "completed"}
+          onClick={() => handleFilter("completed")}
+        >
+          completed
+        </FilterButton>
+      </div>
+      {todos.length > 0 && (
+        <table
+          css={css`
+            border-collapse: collapse;
+          `}
+        >
+          <thead>
+            <tr>
+              <th css={tableBorder}>to do</th>
+              <th css={tableBorder}>completed</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredTodos.map((item) => (
+              <tr key={item.id}>
+                <td css={tableBorder}>{item.name}</td>
+                <td css={tableBorder}>
+                  <input
+                    type="checkbox"
+                    checked={item.completed}
+                    onChange={(e) => handleToggle(item.id)}
+                  ></input>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
